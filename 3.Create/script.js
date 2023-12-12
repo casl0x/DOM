@@ -26,13 +26,17 @@ function line(name){
         let b = parseInt(hexColor.substring(4, 6), 16);
 
         // calcule de la brillance de la couleur du background grâce au modèle YIQ → Y = brillance, I = interpolation, Q = quadrature | nous allons ici utilisé la relation entre Y et le rgb :  
-        let brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        function getContrast(r, g, b){
+            let y = (0.299*r + 0.587*g + 0.144*b);
+            return y 
+        }
+        let brightness = getContrast(r, g, b);
 
         // change la couleur du texte en fonction de la brillance, 128 est le seuil pour distinger une couleur claire ou foncée
-        if (brightness > (255/2)) {
-            para.style.color = 'black';
-        } else {
+        if (brightness <= 128) {
             para.style.color = 'white';
+        } else {
+            para.style.color = 'black';
         }
         
         // .sort() attend en retour des nombres à trier Math.random()-0.5 génère ces nombres qui permet de met dans un ordre alétoire les éléments de classMate 
