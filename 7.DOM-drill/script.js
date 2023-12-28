@@ -22,6 +22,19 @@ document.addEventListener('DOMContentLoaded', function(){
             });
         }
     }
+    document.addEventListener('keypress', function(e){
+        if (e.key === 'r'){
+            const itemsArray = Array.from(ul.children);
+            const fastAndFurious = ul.querySelector('.important');
+            itemsArray.sort(() => Math.random() - 0.5);
+            ul.innerHTML = '';
+            itemsArray.forEach(item => ul.appendChild(item));
+            ul.insertBefore(fastAndFurious, ul.firstChild);
+        }else if (e.key === 'd'){
+            const fastAndFuriousClone = ul.querySelector('.important').cloneNode(true);
+            ul.insertBefore(fastAndFuriousClone, ul.firstChild);
+        }
+    })
 
     // selection d'option et change du contenu affiché
     const div = document.createElement("div");
